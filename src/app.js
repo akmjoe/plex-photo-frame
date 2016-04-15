@@ -1,0 +1,31 @@
+'use strict';
+
+/**
+ * Routing
+ */
+angular
+    .module('photoFrameApp', [
+        'ngRoute',
+        'photoFrameAppControllers',
+        'photoFrameAppServices'
+    ])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/browse-playlists', {
+                templateUrl: 'tpl/browser.html',
+                controller: 'BrowserController'
+            })
+            .when('/play-:playlistId', {
+                templateUrl: 'tpl/slideshow.html',
+                controller: 'SlideshowController'
+            })
+            .otherwise({
+                redirectTo: '/browse-playlists'
+            });
+    }]);
+
+/**
+ * Modules declaration
+ */
+angular.module('photoFrameAppControllers', []);
+angular.module('photoFrameAppServices', ['ngResource']);
