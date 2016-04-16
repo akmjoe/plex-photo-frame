@@ -1,1 +1,15 @@
-EHLO {{browser}}
+EHLO !
+
+<div ng-repeat="playlist in playlists">
+    <a ng-href="#/play/{{playlist.id}}">
+        <img ng-src="{{playlist.thumbnail}}" width="{{cfg.browser.thumbnailSize.w}}"
+             height="{{cfg.browser.thumbnailSize.h}}">
+        <div>{{playlist.title}}</div>
+        <div>{{playlist.size}} photos</div>
+        <div>Views: {{playlist.viewCount}}</div>
+    </a>
+</div>
+
+
+<input id="shuffle" type="checkbox" ng-model="cfg.slideshow.shuffle">
+<label for="shuffle">Shuffle</label>

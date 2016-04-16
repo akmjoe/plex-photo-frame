@@ -15,7 +15,7 @@ angular
                 templateUrl: 'tpl/browser.html',
                 controller: 'BrowserController'
             })
-            .when('/play-:playlistId', {
+            .when('/play/:playlistId', {
                 templateUrl: 'tpl/slideshow.html',
                 controller: 'SlideshowController'
             })
@@ -28,4 +28,4 @@ angular
  * Modules declaration
  */
 angular.module('photoFrameAppControllers', []);
-angular.module('photoFrameAppServices', ['ngResource']);
+angular.module('photoFrameAppServices', []);
