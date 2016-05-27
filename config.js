@@ -8,6 +8,6 @@ window.Config = {
     },
     slideshow: {
         shuffle: true,
-        time: 15    // seconds
+        time: 3    // seconds
     }
 };

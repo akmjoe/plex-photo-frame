@@ -1,12 +1,46 @@
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-    transition: all linear 0.5s;
-    display: block !important;
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
 }
 
-.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.animated {
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+}
+
+.animated.ng-enter {
+    transition: 1s cubic-bezier(0.44, 0.01, 1, 1) all;
+}
+
+.animated.ng-leave {
+    transition: 1s cubic-bezier(0.01, 0.44, 1, 1) all;
+}
+
+.animated.ng-enter {
     opacity: 0;
 }
 
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
-    opacity: 1;
+.animated.ng-enter-active {
+    opacity: 1.0;
+}
+
+.animated.ng-leave {
+    opacity: 1.0;
+}
+
+.animated.ng-leave-active {
+    opacity: 0;
 }

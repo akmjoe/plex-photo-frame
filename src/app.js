@@ -27,5 +27,5 @@ angular
 /**
  * Modules declaration
  */
-angular.module('photoFrameAppControllers', []);
+angular.module('photoFrameAppControllers', ['ngAnimate']);
 angular.module('photoFrameAppServices', []);
