@@ -46,6 +46,42 @@ angular
 
         };
 
+        /**
+         * Maps single playlist to object containing list of photos
+         * @param xmlResponse xml object from server
+         * @returns {{title: string, photos: Array}} playlist object
+         */
+        var mapSinglePlaylistToJson = function (xmlResponse) {
+            var mediaContainer = xmlResponse.getElementsByTagName('MediaContainer');
+            var playlistTitle = mediaContainer[0].getAttribute('title');
+            var photos = [].slice.call(mediaContainer[0].getElementsByTagName('Photo')) // HTMLCollection -> Array
+                .map(function (node) {
+                    var parts = node.getElementsByTagName('Part');
+                    var part = parts[0];
+                    parts.length === 1 || console.error('Multiple part photo! Not implemented feature!');
+                    var mediaList = node.getElementsByTagName('Media');
+                    mediaList.length === 1 || console.error('Multiple media! Not implemented feature!');
+                    var media = mediaList[0],
+                        height = Number(media.getAttribute('height')),
+                        width = Number(media.getAttribute('width'));
+                    return {
+                        parentTitle: node.getAttribute('parentTitle'),
+                        title: node.getAttribute('title'),
+                        year: Number(node.getAttribute('year')),
+                        url: Config.plexPathRoot + part.getAttribute('key'),
+                        size: Number(part.getAttribute('size')),
+                        orientation: Number(part.getAttribute('orientation')),
+                        height: height,
+                        width: width,
+                        aspectRatio: width / height
+                    };
+                });
+            return {
+                title: playlistTitle,
+                photos: photos
+            };
+        };
+
         return {
             /**
              * Gets list of all photo playlists
@@ -56,7 +92,8 @@ angular
                     .then(mapPlaylistsToJson);
             },
             getPhotos: function (playlistId) {
-                return doGetXml('/playlists/' + playlistId + '/items');
+                return doGetXml('/playlists/' + playlistId + '/items')
+                    .then(mapSinglePlaylistToJson);
             }
         };
     }]);

@@ -1,4 +1,6 @@
-EHLO !
+<div>
+    Found <span ng-bind="playlists.length">0</span> playlist<span ng-if="playlists.length > 1">s</span>.
+</div>
 
 <div ng-repeat="playlist in playlists">
     <a ng-href="#/play/{{playlist.id}}">
