@@ -6,7 +6,6 @@
 angular
     .module('photoFrameApp', [
         'ngRoute',
-        'ngCookies',
         'photoFrameAppControllers',
         'photoFrameAppServices'
     ])
