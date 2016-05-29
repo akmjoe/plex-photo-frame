@@ -6,11 +6,11 @@
 angular
     .module('photoFrameAppControllers')
     .controller('BrowserController',
-        ['$scope', '$cookies', 'PlexPlaylist', function ($scope, $cookies, PlexPlaylist) {
+        ['$scope', '$cookies', '$window', 'PlexPlaylist', function ($scope, $cookies, $window, PlexPlaylist) {
             var SETTINGS_KEY = 'slideshowSettings';
 
-            $scope.cfg = Config;
-            $scope.cfg.slideshow = $cookies.getObject(SETTINGS_KEY) || Config.slideshow;
+            $scope.cfg = $window.Config;
+            $scope.cfg.slideshow = $cookies.getObject(SETTINGS_KEY) || $window.Config.slideshow;
 
             /**
              * Saves slideshow settings (time, randomization) to the cookie

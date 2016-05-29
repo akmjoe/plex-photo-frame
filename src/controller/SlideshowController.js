@@ -5,15 +5,11 @@ angular
     .controller('SlideshowController', [
         '$scope',
         '$interval',
-        '$location',
-        '$rootScope',
         '$routeParams',
         '$window',
         'PlexPlaylist',
         function ($scope,
                   $interval,
-                  $location,
-                  $rootScope,
                   $routeParams,
                   $window,
                   PlexPlaylist) {
@@ -59,7 +55,7 @@ angular
                 };
             }
 
-            $scope.cfg = window.Config;
+            $scope.cfg = $window.Config;
             $scope.imageSrc = '';
 
             PlexPlaylist.getPhotos($routeParams.playlistId).then(function (response) {
