@@ -10,6 +10,16 @@ angular
             $scope.cfg = Config;
 
             PlexPlaylist.getPlaylists().then(function(playlists) {
-                $scope.playlists = playlists;
+                $scope.playlists = playlists
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists)
+                    .concat(playlists);
             });
         }]);

@@ -2,11 +2,12 @@ body {
     margin: 0;
     padding: 0;
     background: #000;
-    color: #fff;
+    color: #aaa;
+    font: normal 20px helvetica, arial, sans-serif;
 }
 
 a {
-    color: #ccc;
+    color: #bbb;
     text-decoration: none;
 }
 
@@ -22,11 +23,11 @@ a {
 }
 
 .animated.ng-enter {
-    transition: 1s cubic-bezier(0.44, 0.01, 1, 1) all;
+    transition: 1.5s cubic-bezier(0.44, 0.01, 1, 1) all;
 }
 
 .animated.ng-leave {
-    transition: 1s cubic-bezier(0.01, 0.44, 1, 1) all;
+    transition: 1.5s cubic-bezier(0.01, 0.44, 1, 1) all;
 }
 
 .animated.ng-enter {
@@ -43,4 +44,81 @@ a {
 
 .animated.ng-leave-active {
     opacity: 0;
+}
+
+#header {
+    height: 50px;
+    margin-bottom: 20px;
+    background: #444;
+    border-bottom: solid 1px #555;
+    font: normal 12px Verdana;
+}
+
+#header > h1 {
+    display: block;
+    float: left;
+    width: 250px;
+    font: bold 25px helvetica, arial, sans-serif;
+    text-shadow: 2px 2px 7px #000;
+    color: #ccc;
+    margin: 10px 10px 10px 20px;
+}
+
+#header > #playlist-counter {
+    padding-top: 20px;
+    float: left;
+}
+
+#header > #settings {
+    padding-top: 20px;
+    margin-left: 50px;
+    float: left;
+    width: 350px;
+}
+
+#header > #settings > input#shuffle {
+    margin: 2px 0 0 0;
+    display: block;
+    float: left;
+}
+
+#header > #settings > input#displayTime {
+    width: 45px;
+    margin: -2px 5px 0 50px;
+    border: solid 1px #555;
+    color: #aaa;
+    background: #000;
+    text-align: right;
+    display: block;
+    float: left;
+}
+
+label[for=shuffle] {
+    display: block;
+    float: left;
+    margin-left: 5px;
+}
+
+label[for=displayTime] {
+    display: block;
+    float: left;
+}
+
+.playlist > a {
+    display: block;
+    width: 200px;
+    background: #111;
+    padding: 10px;
+    text-align: center;
+    border: solid 1px #444;
+    margin: 5px;
+    float: left;
+}
+
+.playlist > a > img {
+    box-shadow: 3px 3px 9px #000;
+}
+
+.playlist .size, .views {
+    font-size: 12px;
 }

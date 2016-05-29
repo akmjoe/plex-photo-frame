@@ -67,6 +67,4 @@ angular
                 photoRotator.changePhoto();
                 $interval(photoRotator.changePhoto, $scope.cfg.slideshow.time * 1000);
             });
-            // TODO use https://code.angularjs.org/1.5.0-rc.0/docs/api/ngAnimate/directive/ngAnimateSwap
-            // http://angularjs.blogspot.co.uk/2015/11/angularjs-15-beta2-and-14-releases.html
         }]);

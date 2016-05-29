@@ -1,20 +1,26 @@
-<div>
-    Found <span ng-bind="playlists.length">0</span> playlist<span ng-if="playlists.length > 1">s</span>.
+<div id="header">
+    <h1>Photo Frame</h1>
+    <div id="playlist-counter">
+        Found <span ng-bind="playlists.length">0</span> playlist<span ng-if="playlists.length > 1">s</span>.
+    </div>
+    <div id="settings">
+        <input id="shuffle" type="checkbox" ng-model="cfg.slideshow.shuffle">
+        <label for="shuffle">Shuffle</label>
+
+        <input id="displayTime" type="number" ng-model="cfg.slideshow.time">
+        <label for="displayTime">Display Time (seconds)</label>
+    </div>
 </div>
 
-<div ng-repeat="playlist in playlists">
-    <a ng-href="#/play/{{playlist.id}}">
+
+<div class="playlist">
+    <a ng-href="#/play/{{playlist.id}}"  ng-repeat="playlist in playlists track by $index">
         <img ng-src="{{playlist.thumbnail}}" width="{{cfg.browser.thumbnailSize.w}}"
              height="{{cfg.browser.thumbnailSize.h}}">
         <div>{{playlist.title}}</div>
-        <div>{{playlist.size}} photos</div>
-        <div>Views: {{playlist.viewCount}}</div>
+        <div class="size">{{playlist.size}} photos</div>
+        <div class="views">Views: {{playlist.viewCount}}</div>
     </a>
 </div>
 
 
-<input id="shuffle" type="checkbox" ng-model="cfg.slideshow.shuffle">
-<label for="shuffle">Shuffle</label>
-
-<input id="displayTime" type="number" ng-model="cfg.slideshow.time">
-<label for="displayTime">Display Time (seconds)</label>
