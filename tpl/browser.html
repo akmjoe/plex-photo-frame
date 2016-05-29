@@ -4,10 +4,10 @@
         Found <span ng-bind="playlists.length">0</span> playlist<span ng-if="playlists.length > 1">s</span>.
     </div>
     <div id="settings">
-        <input id="shuffle" type="checkbox" ng-model="cfg.slideshow.shuffle">
+        <input id="shuffle" type="checkbox" ng-model="cfg.slideshow.shuffle" ng-change="saveSlideshowSettings()">
         <label for="shuffle">Shuffle</label>
 
-        <input id="displayTime" type="number" ng-model="cfg.slideshow.time">
+        <input id="displayTime" type="number" ng-model="cfg.slideshow.time" ng-change="saveSlideshowSettings()">
         <label for="displayTime">Display Time (seconds)</label>
     </div>
 </div>
