@@ -10,13 +10,13 @@ angular
             var SETTINGS_KEY = 'slideshowSettings';
 
             $scope.cfg = $window.Config;
-            $scope.cfg.slideshow = $.cookie(SETTINGS_KEY) ? JSON.parse($.cookie(SETTINGS_KEY)) : $window.Config.slideshow;
+            $scope.cfg.slideshow = localStorage.getItem(SETTINGS_KEY) ? JSON.parse(localStorage.getItem(SETTINGS_KEY)) : $window.Config.slideshow;
 
             /**
              * Saves slideshow settings (time, randomization) to the cookie
              */
             $scope.saveSlideshowSettings = function() {
-                $.cookie(SETTINGS_KEY, JSON.stringify($scope.cfg.slideshow));
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify($scope.cfg.slideshow));
             };
 
             PlexPlaylist.getPlaylists().then(function(playlists) {
