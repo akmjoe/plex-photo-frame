@@ -10,6 +10,9 @@
 
         <input id="displayTime" type="number" ng-model="cfg.slideshow.time" ng-change="saveSlideshowSettings()">
         <label for="displayTime">Display Time (seconds)</label>
+
+        <input id="clock" type="checkbox" ng-model="cfg.slideshow.displayTime" ng-change="saveSlideshowSettings()">
+        <label for="clock">Clock</label>
     </div>
 </div>
 

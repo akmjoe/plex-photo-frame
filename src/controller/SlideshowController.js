@@ -57,10 +57,14 @@ angular
 
             $scope.cfg = $window.Config;
             $scope.imageSrc = '';
+            $scope.currentDate = new Date();
 
             PlexPlaylist.getPhotos($routeParams.playlistId).then(function (response) {
                 var photoRotator = new PhotoRotator($scope, response, $scope.cfg.slideshow.shuffle);
                 photoRotator.changePhoto();
                 $interval(photoRotator.changePhoto, $scope.cfg.slideshow.time * 1000);
+                $interval(function() {
+                    $scope.currentDate = new Date();
+                }, 1000);
             });
         }]);

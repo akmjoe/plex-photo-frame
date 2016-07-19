@@ -78,7 +78,7 @@ a {
     padding-top: 20px;
     margin-left: 50px;
     float: left;
-    width: 350px;
+    width: 450px;
 }
 
 #header > #settings > input#shuffle {
@@ -89,7 +89,7 @@ a {
 
 #header > #settings > input#displayTime {
     width: 50px;
-    margin: -2px 5px 0 50px;
+    margin: -2px 5px 0 30px;
     border: solid 1px #555;
     color: #aaa;
     background: #000;
@@ -98,7 +98,14 @@ a {
     float: left;
 }
 
-label[for=shuffle] {
+
+#header > #settings > input#clock {
+    margin: 2px 0 0 25px;
+    display: block;
+    float: left;
+}
+
+label[for=shuffle], label[for=clock] {
     display: block;
     float: left;
     margin-left: 5px;
@@ -126,4 +133,31 @@ label[for=displayTime] {
 
 .playlist .size, .views {
     font-size: 12px;
+}
+
+div#datetime {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+}
+
+div#datetime > #date {
+    font-size: 30px;
+    margin: 0 auto;
+    width: 410px;
+    text-align: center;
+    position: relative;
+    top: 10px;
+}
+
+div#datetime > #time {
+    font-size: 160px;
+    margin: 0 auto;
+    padding: 0;
+    width: 410px;
+    line-height: 150px;
 }
