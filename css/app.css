@@ -1,3 +1,8 @@
+@font-face {
+    font-family: SegoeUiLight;
+    src: url(segoeuil.ttf);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -140,9 +145,10 @@ div#datetime {
     color: rgba(255, 255, 255, 0.7);
     display: block;
     position: fixed;
-    top: 0px;
-    left: 0px;
+    bottom: 0px;
+    right: 0px;
     z-index: 100;
+    font-family: SegoeUiLight;
 }
 
 div#datetime > #date {
@@ -151,13 +157,14 @@ div#datetime > #date {
     width: 410px;
     text-align: center;
     position: relative;
-    top: 10px;
+    bottom: 5px;
 }
 
 div#datetime > #time {
     font-size: 160px;
     margin: 0 auto;
     padding: 0;
+    text-align: center;
     width: 410px;
     line-height: 150px;
 }

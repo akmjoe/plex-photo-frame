@@ -1,7 +1,7 @@
 <div>
     <div id="datetime" ng-if="cfg.slideshow.displayTime">
-        <div id="date" ng-bind="currentDate | date:'fullDate'"></div>
         <div id="time" ng-bind="currentDate | date:'HH:mm'"></div>
+        <div id="date" ng-bind="currentDate | date:'fullDate'"></div>
     </div>
     <img ng-src="{{imageSrc}}"
          ng-animate-swap="imageSrc"
