@@ -14,11 +14,18 @@
     <script src="config.js"></script>
     <script src="src/util.js"></script>
     <script src="src/app.js"></script>
+    <script src="src/controller/MessagesController.js"></script>
     <script src="src/controller/BrowserController.js"></script>
     <script src="src/controller/SlideshowController.js"></script>
     <script src="src/service/PlexPlaylistService.js"></script>
 </head>
 <body>
+    <div id="message-container" ng-controller="MessagesController">
+        <div class="message" ng-repeat="message in messages">
+            <span class="time" ng-bind="message.time | date : 'H:mm:ss'"></span>
+            <span class="text" ng-bind="message.text"></span>
+        </div>
+    </div>
     <div ng-view></div>
 </body>
 </html>

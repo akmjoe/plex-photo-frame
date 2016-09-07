@@ -6,7 +6,7 @@
 angular
     .module('photoFrameAppControllers')
     .controller('BrowserController',
-        ['$scope', '$window', 'PlexPlaylist', function ($scope, $window, PlexPlaylist) {
+        ['$scope', '$window', 'PlexPlaylist', '$timeout', '$rootScope', function ($scope, $window, PlexPlaylist, $timeout, $rootScope) {
             var SETTINGS_KEY = 'slideshowSettings';
 
             $scope.cfg = $window.Config;
@@ -22,4 +22,11 @@ angular
             PlexPlaylist.getPlaylists().then(function(playlists) {
                 $scope.playlists = playlists;
             });
+
+            (function asdf() {
+                $timeout(function() {
+                    $rootScope.$emit('message', 'saskldjh laksjd hkasj dkljah sdkjfhas kdj sd jksd js d sad asd dsajkfhskdjfhals sak jdaskdj hsakdj askdj ');
+                    asdf();
+                }, 2000);
+            })();
         }]);
