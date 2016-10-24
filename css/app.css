@@ -28,11 +28,11 @@ a {
 }
 
 .animated.ng-enter {
-    transition: 1.5s cubic-bezier(0.44, 0.01, 1, 1) all;
+    transition: 3s cubic-bezier(0.60, 0.00, 1, 1) all;
 }
 
 .animated.ng-leave {
-    transition: 1.5s cubic-bezier(0.01, 0.44, 1, 1) all;
+    transition: 3s cubic-bezier(0.00, 0.60, 1, 1) all;
 }
 
 .animated.ng-enter {

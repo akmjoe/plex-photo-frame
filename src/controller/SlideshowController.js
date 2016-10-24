@@ -3,12 +3,13 @@
 angular
     .module('photoFrameAppControllers')
     .controller('SlideshowController', [
+        '$http',
         '$scope',
         '$interval',
         '$routeParams',
         '$window',
         'PlexPlaylist',
-        function ($scope,
+        function ($http, $scope,
                   $interval,
                   $routeParams,
                   $window,
@@ -48,9 +49,12 @@ angular
                         }
                         var photo = photosList.shift();
                         var dimensions = calculateDimensions(photo);
-                        scope.imageSrc = photo.url;
-                        scope.imageWidth = dimensions.width;
-                        scope.imageHeight = dimensions.height;
+                        PlexPlaylist.getPhotoAsBlob(photo.url).then(function(blob) {
+                            URL.revokeObjectURL(scope.imageSrc);
+                            scope.imageSrc = URL.createObjectURL(blob);
+                            scope.imageWidth = dimensions.width;
+                            scope.imageHeight = dimensions.height;
+                        });
                     }
                 };
             }
