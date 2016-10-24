@@ -82,21 +82,6 @@ angular
             };
         };
 
-        /**
-         * Returns image as a blob
-         * @param url image url to retrieve
-         * @returns {Blob} image blob
-         */
-        var getPhotoAsBlob = function(url) {
-            return $http({
-                url: url,
-                method: 'GET',
-                responseType: 'blob'
-            }).then(function(response) {
-                return response.data;
-            });
-        };
-
         return {
             /**
              * Gets list of all photo playlists
@@ -109,7 +94,6 @@ angular
             getPhotos: function (playlistId) {
                 return doGetXml('/playlists/' + playlistId + '/items')
                     .then(mapSinglePlaylistToJson);
-            },
-            getPhotoAsBlob: getPhotoAsBlob
+            }
         };
     }]);

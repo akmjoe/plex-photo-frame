@@ -28,4 +28,4 @@ angular
  * Modules declaration
  */
 angular.module('photoFrameAppControllers', ['ngAnimate']);
-angular.module('photoFrameAppServices', []);
+angular.module('photoFrameAppServices', ['ngAnimate']);
