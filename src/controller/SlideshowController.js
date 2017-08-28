@@ -42,7 +42,7 @@ angular
 
                 return {
                     changePhoto: function() {
-                        if(photosList.length == 0) {
+                        if(photosList.length === 0) {
                             photosList = photosObject.photos.copy();
                             if(isShuffled) {
                                 photosList.shuffle()

@@ -1,6 +1,67 @@
 'use strict';
 
 /**
+ * Maps playlists to the list of JSON objects. Filters only photo playlists.
+ * @param response json response from server
+ * @returns {Array.<JSON>} playlist objects
+ */
+function mapPlaylistsToJson(response) {
+    return response.MediaContainer.Metadata
+        .map(function (node) {
+            return {
+                absolutePath: Config.plexPathRoot + node.key,
+                path: node.key,
+                type: node.playlistType,
+                size: node.leafCount,
+                title: node.title,
+                viewCount: node.viewCount,
+                thumbnail: Config.plexPathRoot + node.composite,
+                id: Number(node.ratingKey)
+            };
+        }).filter(function (playlist) {
+            return playlist.type === 'photo';
+        });
+
+}
+
+/**
+ * Maps single playlist to object containing list of photos
+ * @param response json response from server
+ * @returns {{title: string, photos: Array}} playlist object
+ */
+function mapSinglePlaylistToJson(response) {
+    var mediaContainer = response.MediaContainer;
+    var playlistTitle = mediaContainer.title;
+    var photos = mediaContainer.Metadata // HTMLCollection -> Array
+        .map(function (node) {
+            var mediaList = node.Media,
+                media = mediaList[0];
+            mediaList.length === 1 || console.error('Multiple media! Not implemented feature!');
+            var parts = media.Part,
+                part = parts[0];
+            parts.length === 1 || console.error('Multiple part photo! Not implemented feature!');
+            var height = Number(media.height),
+                width = Number(media.width);
+            return {
+                parentTitle: node.parentTitle,
+                title: node.title,
+                year: Number(node.year),
+                url: Config.plexPathRoot + part.key,
+                size: Number(part.size),
+                orientation: Number(part.orientation),
+                height: height,
+                width: width,
+                aspectRatio: width / height
+            };
+        });
+    return {
+        title: playlistTitle,
+        photos: photos
+    };
+}
+
+
+/**
  * Service for obtaining the data from the PLEX
  */
 angular
@@ -12,75 +73,13 @@ angular
          * @param path path to query
          * @returns promise
          */
-        var doGetXml = function (path) {
-            return $http.get(Config.plexPathRoot + path, {
-                transformResponse: $.parseXML
-            }).then(function (response) {
-                return response.data;
-            });
-        };
-
-        /**
-         * Maps playlists to the list of JSON objects. Filters only photo playlists.
-         * @param xmlResponse xml object from server
-         * @returns {Array.<JSON>} playlist objects
-         */
-        var mapPlaylistsToJson = function (xmlResponse) {
-            var playlistKeyRegExp = /\/playlists\/(\d+)\/items/g;
-            var playlists = xmlResponse.getElementsByTagName('Playlist');
-            return [].slice.call(playlists) // HTMLCollection -> Array
-                .map(function (node) {
-                    return {
-                        absolutePath: Config.plexPathRoot + node.getAttribute('key'),
-                        path: node.getAttribute('key'),
-                        type: node.getAttribute('playlistType'),
-                        size: node.getAttribute('leafCount'),
-                        title: node.getAttribute('title'),
-                        viewCount: node.getAttribute('viewCount'),
-                        thumbnail: Config.plexPathRoot + node.getAttribute('composite'),
-                        id: Number(playlistKeyRegExp.exec(node.getAttribute('key'))[1])
-                    };
-                }).filter(function (playlist) {
-                    return playlist.type === 'photo';
+        function doGet(path) {
+            return $http
+                .get(Config.plexPathRoot + path)
+                .then(function (response) {
+                    return response.data;
                 });
-
-        };
-
-        /**
-         * Maps single playlist to object containing list of photos
-         * @param xmlResponse xml object from server
-         * @returns {{title: string, photos: Array}} playlist object
-         */
-        var mapSinglePlaylistToJson = function (xmlResponse) {
-            var mediaContainer = xmlResponse.getElementsByTagName('MediaContainer');
-            var playlistTitle = mediaContainer[0].getAttribute('title');
-            var photos = [].slice.call(mediaContainer[0].getElementsByTagName('Photo')) // HTMLCollection -> Array
-                .map(function (node) {
-                    var parts = node.getElementsByTagName('Part');
-                    var part = parts[0];
-                    parts.length === 1 || console.error('Multiple part photo! Not implemented feature!');
-                    var mediaList = node.getElementsByTagName('Media');
-                    mediaList.length === 1 || console.error('Multiple media! Not implemented feature!');
-                    var media = mediaList[0],
-                        height = Number(media.getAttribute('height')),
-                        width = Number(media.getAttribute('width'));
-                    return {
-                        parentTitle: node.getAttribute('parentTitle'),
-                        title: node.getAttribute('title'),
-                        year: Number(node.getAttribute('year')),
-                        url: Config.plexPathRoot + part.getAttribute('key'),
-                        size: Number(part.getAttribute('size')),
-                        orientation: Number(part.getAttribute('orientation')),
-                        height: height,
-                        width: width,
-                        aspectRatio: width / height
-                    };
-                });
-            return {
-                title: playlistTitle,
-                photos: photos
-            };
-        };
+        }
 
         return {
             /**
@@ -88,11 +87,11 @@ angular
              * @returns promise, which returns list of
              */
             getPlaylists: function () {
-                return doGetXml('/playlists/all')
+                return doGet('/playlists/all')
                     .then(mapPlaylistsToJson);
             },
             getPhotos: function (playlistId) {
-                return doGetXml('/playlists/' + playlistId + '/items')
+                return doGet('/playlists/' + playlistId + '/items')
                     .then(mapSinglePlaylistToJson);
             }
         };
