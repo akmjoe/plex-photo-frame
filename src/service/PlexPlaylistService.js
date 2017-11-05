@@ -32,7 +32,7 @@ function mapPlaylistsToJson(response) {
 function mapSinglePlaylistToJson(response) {
     var mediaContainer = response.MediaContainer;
     var playlistTitle = mediaContainer.title;
-    var photos = mediaContainer.Metadata // HTMLCollection -> Array
+    var photos = mediaContainer.Metadata
         .map(function (node) {
             var mediaList = node.Media,
                 media = mediaList[0];
@@ -46,7 +46,7 @@ function mapSinglePlaylistToJson(response) {
                 parentTitle: node.parentTitle,
                 title: node.title,
                 year: Number(node.year),
-                url: Config.plexPathRoot + part.key,
+                relativeUrl: part.key,
                 size: Number(part.size),
                 orientation: Number(part.orientation),
                 height: height,

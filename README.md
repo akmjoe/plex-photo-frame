@@ -1,4 +1,4 @@
-# plex-photo-frame
+# Plex Photo Frame
 Alternative implementation for photo slideshow from playlist in Plex Media Server
 
 ## Instalation
@@ -9,3 +9,7 @@ device on which slideshow will be displayed
 4. Deploy on on any HTTP server
 5. Open browser and type the address of this server
 4. Enjoy!
+
+## Sample screenshot
+
+![Photo frame](https://i.imgur.com/qf05Sm3.png)
