@@ -9,6 +9,6 @@ window.Config = {
     slideshow: {
         displayTime: true,
         shuffle: true,
-        time: 15    // seconds
+        time: 20    // seconds
     }
 };

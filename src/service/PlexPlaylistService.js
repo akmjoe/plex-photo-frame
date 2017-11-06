@@ -25,6 +25,31 @@ function mapPlaylistsToJson(response) {
 }
 
 /**
+ * Fixes size for rotated photos.
+ * @param media media element
+ * @param orientationArgument see https://www.daveperrett.com/articles/2012/07/28/exif-orientation-handling-is-a-ghetto/
+ * @returns {{height: Number, width: Number}}
+ */
+function fixSizeForOrientation(media, orientationArgument) {
+    var height = parseInt(media.height),
+        width = parseInt(media.width),
+        orientation = parseInt(orientationArgument || 1),
+        size = {
+            height: height,
+            width: width
+        };
+
+    if(orientation >= 5 && orientation <= 8) {
+        // swap
+        size.width = height;
+        size.height = width;
+    } else if (orientation < 1 || orientation > 8 || isNaN(orientation)) {
+        console.error('unknown orientation:', orientationArgument);
+    }
+    return size;
+}
+
+/**
  * Maps single playlist to object containing list of photos
  * @param response json response from server
  * @returns {{title: string, photos: Array}} playlist object
@@ -40,8 +65,7 @@ function mapSinglePlaylistToJson(response) {
             var parts = media.Part,
                 part = parts[0];
             parts.length === 1 || console.error('Multiple part photo! Not implemented feature!');
-            var height = Number(media.height),
-                width = Number(media.width);
+            var size = fixSizeForOrientation(media, part.orientation);
             return {
                 parentTitle: node.parentTitle,
                 title: node.title,
@@ -49,9 +73,9 @@ function mapSinglePlaylistToJson(response) {
                 relativeUrl: part.key,
                 size: Number(part.size),
                 orientation: Number(part.orientation),
-                height: height,
-                width: width,
-                aspectRatio: width / height
+                height: size.height,
+                width: size.width,
+                aspectRatio: size.width / size.height
             };
         });
     return {
