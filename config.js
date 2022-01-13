@@ -1,5 +1,5 @@
 window.Config = {
-    plexPathRoot: 'http://192.168.0.2:32400', // without trailing slash
+    plexPathRoot: 'http://192.168.1.100:3000', // without trailing slash
     browser: {
         thumbnailSize: {
             w: 100, // px
@@ -9,6 +9,6 @@ window.Config = {
     slideshow: {
         displayTime: true,
         shuffle: true,
-        time: 20    // seconds
+        time: 10    // seconds
     }
 };
