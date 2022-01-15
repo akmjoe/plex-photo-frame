@@ -16,8 +16,16 @@ angular
                 controller: 'BrowserController'
             })
             .when('/play/:playlistId', {
-                templateUrl: 'tpl/slideshow.html',
+                templateUrl: 'tpl/slideshow.html?v=1',
                 controller: 'SlideshowController'
+            })
+            .when('/download-playlists', {
+                templateUrl: 'tpl/download-browser.html',
+                controller: 'PlaylistController'
+            })
+            .when('/download/:playlistId', {
+                templateUrl: 'tpl/slideshow.html',
+                controller: 'DownloadController'
             })
             .otherwise({
                 redirectTo: '/browse-playlists'

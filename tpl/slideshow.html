@@ -1,6 +1,10 @@
 <div>
     <div id="datetime" ng-if="cfg.slideshow.displayTime">
-        <div id="time" ng-bind="currentDate | date:'HH:mm'"></div>
+        <div id="time" ng-if="cfg.slideshow.militaryTime" ng-bind="currentDate | date:'HH:mm'"></div>
+        <div id="time" ng-if="!cfg.slideshow.militaryTime">
+            <span id="time-number" ng-bind="currentDate | date:'h:mm'"></span>
+            <span id="time-day" ng-bind="currentDate | date:'a'"></span>
+        </div>
         <div id="date" ng-bind="currentDate | date:'fullDate'"></div>
     </div>
     <img ng-src="{{imageSrc}}"

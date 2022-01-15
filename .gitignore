@@ -1,2 +1,5 @@
 .idea/
+proxy/node-modules/
+.komodotools
+*.komodoproject
 

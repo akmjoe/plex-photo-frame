@@ -8,6 +8,7 @@ window.Config = {
     },
     slideshow: {
         displayTime: true,
+        militaryTime: false,
         shuffle: true,
         time: 10    // seconds
     }

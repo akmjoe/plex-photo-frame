@@ -110,6 +110,13 @@ a {
     float: left;
 }
 
+#header > #links {
+    padding-top: 20px;
+    margin-left: 50px;
+    float: left;
+    width: 100px;
+}
+
 label[for=shuffle], label[for=clock] {
     display: block;
     float: left;
@@ -121,7 +128,7 @@ label[for=displayTime] {
     float: left;
 }
 
-.playlist > a {
+.playlist > a, .playlist > form {
     display: block;
     width: 200px;
     background: #111;
@@ -132,7 +139,7 @@ label[for=displayTime] {
     float: left;
 }
 
-.playlist > a > img {
+.playlist > a > img, .playlist > form > a > img {
     box-shadow: 3px 3px 9px #000;
 }
 
@@ -160,8 +167,12 @@ div#datetime > #date {
     bottom: 5px;
 }
 
+div#time > #time-day {
+    font-size: 60px;
+}
+
 div#datetime > #time {
-    font-size: 160px;
+    font-size: 120px;
     margin: 0 auto;
     padding: 0;
     text-align: center;

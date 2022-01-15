@@ -24,6 +24,25 @@ function mapPlaylistsToJson(response) {
 
 }
 
+function mapDownloadPlaylistsToJson(response) {
+    return response.MediaContainer.Metadata
+        .map(function (node) {
+            return {
+                absolutePath: Config.plexPathRoot + node.key,
+                path: node.key,
+                type: node.playlistType,
+                size: node.leafCount,
+                title: node.title,
+                viewCount: node.viewCount,
+                thumbnail: Config.plexPathRoot + node.composite,
+                id: Number(node.ratingKey)
+            };
+        }).filter(function (playlist) {
+            return playlist.type === 'photo' || playlist.type === 'audio';
+        });
+
+}
+
 /**
  * Fixes size for rotated photos.
  * @param media media element
@@ -72,6 +91,7 @@ function mapSinglePlaylistToJson(response) {
                 year: Number(node.year),
                 relativeUrl: part.key,
                 size: Number(part.size),
+                file: part.file,
                 orientation: Number(part.orientation),
                 height: size.height,
                 width: size.width,
@@ -113,6 +133,10 @@ angular
             getPlaylists: function () {
                 return doGet('/playlists/all')
                     .then(mapPlaylistsToJson);
+            },
+            getDownloadPlaylists: function () {
+                return doGet('/playlists/all')
+                    .then(mapDownloadPlaylistsToJson);
             },
             getPhotos: function (playlistId) {
                 return doGet('/playlists/' + playlistId + '/items')

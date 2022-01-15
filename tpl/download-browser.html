@@ -1,0 +1,25 @@
+<div id="header">
+    <img src="img/logo48.png">
+    <h1>Playlist Download</h1>
+    <div id="playlist-counter">
+        Found <span ng-bind="playlists.length">0</span> playlist<span ng-if="playlists.length > 1">s</span>
+    </div>
+</div>
+
+
+<div class="playlist">
+    <form method="post" action="{{formUrl}}" id="form{{playlist.id}}" name="form{{playlist.id}}" ng-repeat="playlist in playlists track by $index">
+        <a href="#/view/{{playlist.id}}">
+        <img ng-src="{{playlist.thumbnail}}" width="{{cfg.browser.thumbnailSize.w}}"
+             height="{{cfg.browser.thumbnailSize.h}}">
+        <div>{{playlist.title}}</div>
+        <div class="size">{{playlist.size}} <span ng-if="playlist.type=='photo'">Photos</span><span ng-if="playlist.type=='audio'">Songs</span></div>
+        <div class="views">Views: {{playlist.viewCount}}</div>
+        <input type="hidden" name="playlist_id" value="{{playlist.id}}">
+        <input type="hidden" name="files[]" value="{{files.file}}" ng-repeat="files in playlist.files">
+        </a>
+        <input type="submit" value="Download">
+    </form>
+</div>
+
+
